@@ -1,0 +1,11 @@
+{
+  "name": "custom-login",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start:dev": "cd server && npm run start:dev && cd .. && cd client && npm run start"
+  },
+  "author": "",
+  "license": "ISC"
+}
