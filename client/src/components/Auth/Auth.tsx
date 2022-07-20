@@ -10,12 +10,18 @@ export const Auth: React.FC = () => {
 	const submitHandler = (e: React.FormEvent) => {
 		e.preventDefault();
 
-		axios.get('/login', {
-			params: {
-				login,
-				password,
-			},
-		});
+		if (login && password) {
+			axios
+				.get('/auth', {
+					params: {
+						login,
+						password,
+					},
+				})
+				.then((res) => {
+					console.log(res);
+				});
+		}
 	};
 
 	const onLoginChange = (

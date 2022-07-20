@@ -1,19 +1,15 @@
-import { Controller, Get } from '@nestjs/common';
-import { of, Observable } from 'rxjs';
-import { AppService } from './app.service';
+import { Controller, Request, Post, UseGuards } from '@nestjs/common';
+import { AuthGuard } from '@nestjs/passport';
+import { AuthService } from './auth/auth.service';
+import {LocalAuthGuard} from './auth/local-auth.guard';
 
 @Controller()
 export class AppController {
-  constructor(private readonly appService: AppService) {}
+  constructor(private authService: AuthService) {}
 
-  @Get()
-  getHello(): string {
-    return this.appService.getHello();
-  }
-
-  
-  @Get('/123')
-  get123(): Observable<string> {
-    return of('123');
+  @UseGuards(LocalAuthGuard)
+  @Post('auth/login')
+  async login(@Request() req) {
+    return this.authService.login(req.user);
   }
 }
